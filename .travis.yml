@@ -7,7 +7,7 @@ before_install:
   - docker build -t kocsisstefan/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true kocsisstefan/react-test npm test
+  - docker run -e CI=true kocsisstefan/react-test npm test -- --coverage
 
 
 after_success:
