@@ -1,5 +1,5 @@
-language: generic 
 sudo: required
+language: generic
 services:
   - docker
 
@@ -7,7 +7,7 @@ before_install:
   - docker build -t kocsisstefan/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true kocsisstefan/react-test npm test -- --coverage
+  - docker run -e CI=true kocsisstefan/react-test npm test
 
 
 after_success:
@@ -24,13 +24,13 @@ after_success:
   - docker push kocsisstefan/multi-worker
 
 deploy:
-	provider: elasticbeanstalk
-	region: 'eu-central-1'
-	app: 'multi-docker'
-	env: 'multi-docker'
-	bucket_name: 'elasticbeanstalk-eu-central-1-338624239204'
-	bucket_path: 'docker-multi'
-	on:
-		branch: master
-	access_key_id: $AWS_ACCESS_KEY
-	secret_access_key: $AWS_SECRET_KEY
+  provider: elasticbeanstalk
+  region: 'eu-central-1'
+  app: 'multi-docker'
+  env: 'multi-docker'
+  bucket_name: 'elasticbeanstalk-eu-central-1-338624239204'
+  bucket_path: 'docker-multi'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
